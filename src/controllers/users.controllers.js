@@ -10,8 +10,6 @@ const getAll = catchError(async(req, res) => {
 const create = catchError(async(req, res) => {
     const result = await User.create(req.body);
     return res.status(201).json(result);
-
-    
 });
 
 const remove = catchError(async(req, res) => {
@@ -43,8 +41,14 @@ const login = catchError(async(req, res)=>{
     const isValid = await bcrypt.compare(password, user.password)
     if(!isValid) return res.status(401).json("Incorrect credentials")
 
+    const token = jwt.sign(
+        { user },
+        process.env.TOKEN_SECRET,
+        { expiresIn: '1d' }
+      )
 
-    return res.json({user})
+
+    return res.json({user, token})
 })
 
 module.exports = {
