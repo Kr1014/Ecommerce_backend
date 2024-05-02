@@ -77,7 +77,7 @@ test("GET -> BASE_URL, should return statusCode 200, and res.body.length === 1",
             .send(user)
 
         expect(res.status).toBe(200)
-        expect(res.user.email).toBe(user.email)
+        expect(res.body.user.email).toBe(user.email)
         expect(res.body.token).toBeDefined()
   })
   
