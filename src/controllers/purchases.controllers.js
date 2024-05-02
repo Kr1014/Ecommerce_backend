@@ -7,7 +7,7 @@ const Cart = require('../models/Cart');
 const getAll = catchError(async(req, res) => {
     const userId = req.user.id
     const results = await Purchase.findAll({
-        where : {userId},
+        where : {userId}, attributes : {exclude : ["createdAt", "updatedAt"]},
         include: [
             {
                 model : Product,
@@ -21,6 +21,7 @@ const getAll = catchError(async(req, res) => {
 
 const create = catchError(async(req, res) => {
     const userId = req.user.id
+
     const cart = await Cart.findAll({
         where : {userId},
         raw: true,
@@ -42,5 +43,7 @@ module.exports = {
     getAll,
     create
 }
+
+
 
 

@@ -6,6 +6,6 @@ const routerPurchase = express.Router();
 
 routerPurchase.route('/')
     .get(verifyJwt ,getAll)
-    .post(create);
+    .post(verifyJwt, create);
 
 module.exports = routerPurchase;
